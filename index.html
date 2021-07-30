@@ -11,90 +11,47 @@
     <script src='js/bootstrap.js'></script>
 </head>
 
-<body class="h-100 bg-dark">
+<body class="h-100">
     <div class="container-fluid h-100">
         <div class="row justify-content-center align-items-center h-100">
-            <div class="col-xs-11 col-sm-11 col-md-11 col-lg-5">
-                <div class="card bg-dark text-white">
-                    <div class="card-header row">
-                        <div class="d-flex d-flex justify-content-between flex-row">
-                            <div class="p-2">
-                                Profit Calculator
-                            </div>
-                            <div class="p-2">
-                                <div class="form-check justify-content-right">
-                                    <input class="form-check-input bg-dark text-white border border-white" type="checkbox" value="1" id="pc_perCoin">
-                                    <label class="form-check-label" for="pc_perCoin">Per Coin</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="input-group bg-dark mb-3">
-                            <span class="input-group-text bg-dark text-white">Coins</span>
-                            <input type="number" class="form-control bg-dark text-white" aria-label="Buy At"
-                                id="pc_coins" value="1">
-                        </div>
-                        <div class="input-group bg-dark mb-3">
-                            <span class="input-group-text bg-dark text-white">Buy</span>
-                            <input type="text" class="form-control bg-dark text-white" aria-label="Buy At"
-                                id="pc_buyAt">
-                            <span class="input-group-text bg-dark text-white">₹</span>
-                            <span class="input-group-text bg-dark text-white">Sell</span>
-                            <input type="text" class="form-control bg-dark text-white" aria-label="Buy At"
-                                id="pc_sellAt">
-                            <span class="input-group-text bg-dark text-white">₹</span>
-                        </div>
-                        <div class="input-group bg-dark mb-3">
-                            <span class="input-group-text bg-dark text-white">Total Buy</span>
-                            <input type="text" class="form-control bg-dark text-white" aria-label="Buy At"
-                                id="pc_totalBuyAt" disabled>
-                            <span class="input-group-text bg-dark text-white">₹</span>
-                            <span class="input-group-text bg-dark text-white">Total Sell</span>
-                            <input type="text" class="form-control bg-dark text-white" aria-label="Buy At"
-                                id="pc_totalSellAt" disabled>
-                            <span class="input-group-text bg-dark text-white">₹</span>
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text bg-dark text-white">Maker</span>
-                            <input type="text" class="form-control bg-dark text-white" disabled aria-label="Buy At"
-                                id="pc_maker">
-                            <span class="input-group-text bg-dark text-white">₹</span>
-                            <span class="input-group-text bg-dark text-white">Taker</span>
-                            <input type="text" class="form-control bg-dark text-white" disabled aria-label="Buy At"
-                                id="pc_taker">
-                            <span class="input-group-text bg-dark text-white">₹</span>
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text bg-dark text-white">Tax</span>
-                            <input type="text" class="form-control bg-dark text-white" disabled aria-label="Buy At"
-                                id="pc_taxP">
-                            <span class="input-group-text bg-dark text-white">%</span>
-                            <input type="text" class="form-control bg-dark text-white" disabled aria-label="Buy At"
-                                id="pc_taxV">
-                            <span class="input-group-text bg-dark text-white">₹</span>
-                        </div>
-                        <div class="input-group mb-3" id="pc_profit">
-                            <span class="input-group-text bg-dark text-white">Overall Profit</span>
-                            <input type="text" class="form-control bg-dark text-white" aria-label="Buy At"
-                                id="pc_profitP">
-                            <span class="input-group-text bg-dark text-white">%</span>
-                            <input type="text" class="form-control bg-dark text-white" aria-label="Buy At"
-                                id="pc_profitV">
-                            <span class="input-group-text bg-dark text-white">₹</span>
-                        </div>
-                        <div class="input-group mb-3" id="pc_profit">
-                            <span class="input-group-text bg-dark text-white">In-Hand Profit</span>
-                            <input type="text" class="form-control bg-dark text-white" aria-label="Buy At"
-                                id="pc_hProfitP">
-                            <span class="input-group-text bg-dark text-white">%</span>
-                            <input type="text" class="form-control bg-dark text-white" aria-label="Buy At"
-                                id="pc_hProfitV">
-                            <span class="input-group-text bg-dark text-white">₹</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            Profit Calculator
+            <input class="form-check-input   border border-white" type="checkbox" value="1" id="pc_perCoin">
+            <label class="form-check-label" for="pc_perCoin">Per Coin</label>
+            <span class="input-group-text  ">Coins</span>
+            <input type="number" class="form-control  " aria-label="Buy At" id="pc_coins" value="1">
+            <span class="input-group-text  ">Buy</span>
+            <input type="text" class="form-control  " aria-label="Buy At" id="pc_buyAt">
+            <span class="input-group-text  ">₹</span>
+            <span class="input-group-text  ">Sell</span>
+            <input type="text" class="form-control  " aria-label="Buy At" id="pc_sellAt">
+            <span class="input-group-text  ">₹</span>
+            <span class="input-group-text  ">Total Buy</span>
+            <input type="text" class="form-control  " aria-label="Buy At" id="pc_totalBuyAt" disabled>
+            <span class="input-group-text  ">₹</span>
+            <span class="input-group-text  ">Total Sell</span>
+            <input type="text" class="form-control  " aria-label="Buy At" id="pc_totalSellAt" disabled>
+            <span class="input-group-text  ">₹</span>
+            <span class="input-group-text  ">Maker</span>
+            <input type="text" class="form-control  " disabled aria-label="Buy At" id="pc_maker">
+            <span class="input-group-text  ">₹</span>
+            <span class="input-group-text  ">Taker</span>
+            <input type="text" class="form-control  " disabled aria-label="Buy At" id="pc_taker">
+            <span class="input-group-text  ">₹</span>
+            <span class="input-group-text  ">Tax</span>
+            <input type="text" class="form-control  " disabled aria-label="Buy At" id="pc_taxP">
+            <span class="input-group-text  ">%</span>
+            <input type="text" class="form-control  " disabled aria-label="Buy At" id="pc_taxV">
+            <span class="input-group-text  ">₹</span>
+            <span class="input-group-text  ">Overall Profit</span>
+            <input type="text" class="form-control  " aria-label="Buy At" id="pc_profitP">
+            <span class="input-group-text  ">%</span>
+            <input type="text" class="form-control  " aria-label="Buy At" id="pc_profitV">
+            <span class="input-group-text  ">₹</span>
+            <span class="input-group-text  ">In-Hand Profit</span>
+            <input type="text" class="form-control  " aria-label="Buy At" id="pc_hProfitP">
+            <span class="input-group-text  ">%</span>
+            <input type="text" class="form-control  " aria-label="Buy At" id="pc_hProfitV">
+            <span class="input-group-text  ">₹</span>
         </div>
     </div>
     <script src='js/jquery-3.6.0.js'></script>
