@@ -84,6 +84,6 @@ $(document).ready(function () {
 
     buyInput.keyup(buySellHandler);
     sellInput.keyup(buySellHandler);
-    coins.change(buySellHandler);
+    coins.keyup(buySellHandler);
     perCoinCheck.change(buySellHandler);
 });
