@@ -3,20 +3,25 @@ $(document).ready(function () {
     let sellInput = $("#pc_sellAt");
     let totalBuyInput = $("#pc_totalBuyAt");
     let totalSellInput = $("#pc_totalSellAt");
-    let totalBuySell = $("#pc_totalBuySell");
-    let maker = $("#pc_maker");
-    let taker = $("#pc_taker");
-    let taxP = $("#pc_taxP");
-    let taxV = $("#pc_taxV");
-    let profitP = $("#pc_profitP");
-    let profitV = $("#pc_profitV");
-    let inHandProfitP = $("#pc_hProfitP");
-    let inHandProfitV = $("#pc_hProfitV");
-    let perCoinCheck = $("#pc_perCoin");
+    let is50LessTax = $("#pc_50_less_tax");
     let coins = $("#pc_coins");
+    let perProfitInput = $(`#pc_profit_per`);
+    let totalProfitInput = $(`#pc_profit_total`);
 
     let makerPercent = 0.2;
     let takerPercent = 0.2;
+
+    is50LessTax.change(function (a) {
+        if (is50LessTax.is(":checked")) {
+            makerPercent = 0.1;
+            takerPercent = 0.1;
+            buySellHandler();
+        } else {
+            makerPercent = 0.1;
+            takerPercent = 0.1;
+            buySellHandler();
+        }
+    })
 
 
     const parse = function (value) {
@@ -24,7 +29,7 @@ $(document).ready(function () {
     }
 
     const percent = function (val, percent) {
-        return parse(val * percent / 100);
+        return `${parse(val * percent / 100)}`;
     }
 
     const calPercent = function (base, value) {
@@ -40,50 +45,71 @@ $(document).ready(function () {
         buyInput.val(buyInput.val().replace(/[^\d.-]/g, ''));
         sellInput.val(sellInput.val().replace(/[^\d.-]/g, ''));
         if (
-            sellInput.val() !== null && sellInput.val().length != 0
-            && buyInput.val() !== null && buyInput.val().length != 0
+            sellInput.val() !== null && sellInput.val().length !== 0
+            && buyInput.val() !== null && buyInput.val().length !== 0
         ) {
-            let coinCount = parseFloat(perCoinCheck.is(":checked") ? 1 : coins.val());
-            let buy = parseFloat(buyInput.val()) * coinCount;
-            let sell = parseFloat(sellInput.val()) * coinCount;
+            let coinCount = parseFloat(coins.val());
+
+            // single coin data
+
+            let buy = parseFloat(buyInput.val());
+            let sell = parseFloat(sellInput.val());
 
             let makerTax = parseFloat(percent(buy, makerPercent));
             let takerTax = parseFloat(percent(sell, takerPercent));
 
-            let profit = parse(sell - buy);
-            let profitPercent = calPercent(buy, profit);
+            //// without tax data
+            let profitWithoutTax = parse(sell - buy);
+            let p_profitWithoutTax = calPercent(buy, profitWithoutTax);
 
-            let tax = parse(makerTax + takerTax);
-            let taxPercent = calPercent(buy, tax);
+            //// with tax data
+            let realBuy = buy + makerTax;
+            let realSell = sell - takerTax;
 
-            let inHandProfit = parse(sell - buy - tax);
-            let inHandProfitPercent = calPercent(buy, inHandProfit);
+            let profitAfterTax = realSell - realBuy;
 
-            console.log({
-                aa_coins: coinCount,
-                ab_perCoin: perCoinCheck.is(":checked"),
-                a_buy: buy, b_sell: sell, c_makerTax: makerTax, d_takerTax: takerTax, e_profit: profit, f_profitPercent: profitPercent, g_tax: tax, h_taxPercent: taxPercent
-             })
+            alertLoss(realSell, realBuy, sellInput);
 
-            maker.val(show(makerTax));
-            taker.val(show(takerTax));
 
-            profitP.val(show(profitPercent));
-            profitV.val(show(profit));
+            // total coin data
 
-            taxV.val(show(tax));
-            taxP.val(show(taxPercent));
+            let totalBuy = parseFloat(`${buy}`) * coinCount;
+            let totalSell = parseFloat(`${sell}`) * coinCount;
 
-            inHandProfitV.val(show(inHandProfit));
-            inHandProfitP.val(show(inHandProfitPercent))
+            let totalMakerTax = parseFloat(percent(totalBuy, makerPercent));
+            let totalTakerTax = parseFloat(percent(totalSell, takerPercent));
 
-            totalBuyInput.val(show(buy));
-            totalSellInput.val(show(sell));
+            // without tax
+
+            let realTotalBuy = totalBuy + totalMakerTax;
+            let realTotalSell = totalSell - totalTakerTax;
+
+            totalBuyInput.val(show(realTotalBuy));
+            totalSellInput.val(show(realTotalSell));
+
+            perProfitInput.val(show(realSell - realBuy));
+            totalProfitInput.val(show(realTotalSell - realTotalBuy));
+
+            alertLoss(realTotalSell, realTotalBuy, totalSellInput);
         }
     };
 
+    const alertLoss = function (sell, buy, selector) {
+        const tempSell = show(sell);
+        const tempBuy = show(buy);
+        if (tempSell < tempBuy) {
+            selector.attr('style', 'background-color: red !important');
+        } else if (tempSell === tempBuy) {
+            selector.attr('style', 'background-color: blue !important');
+        } else {
+            selector.attr('style', 'background-color: green !important');
+        }
+    }
+
     buyInput.keyup(buySellHandler);
     sellInput.keyup(buySellHandler);
+    coins.change(buySellHandler);
     coins.keyup(buySellHandler);
-    perCoinCheck.change(buySellHandler);
+    coins.keydown(buySellHandler);
+    coins.keypress(buySellHandler);
 });
