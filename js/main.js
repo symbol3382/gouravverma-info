@@ -17,8 +17,8 @@ $(document).ready(function () {
             takerPercent = 0.1;
             buySellHandler();
         } else {
-            makerPercent = 0.1;
-            takerPercent = 0.1;
+            makerPercent = 0.2;
+            takerPercent = 0.2;
             buySellHandler();
         }
     })
